@@ -25,23 +25,25 @@ function App() {
   // for bmi pin position based on bmi value
   const [positionBmiPin, setPositionBmiPin] = useState(0);
 
-  useEffect(()=>{
+  const changeHeight = (height)=>{
+    setHeight(height);
     const errHeight = (height.length>=0 && `${height*1}`==='NaN' ) || height[0]==='.' ? true : false;
     
     setErr({
       height: errHeight,
       weight: err.weight
     })
-  },[height])
+  }
 
-  useEffect(()=>{
+  const changeWeight = (weight)=>{
+    setWeight(weight)
     const errWeight = (weight.length>=0 && `${weight*1}`==='NaN') || weight[0]==='.' ? true : false;
     
     setErr({
       height: err.height,
       weight: errWeight
     })
-  },[weight])
+  }
 
   useEffect(()=>{
     // set the margin left of BMI pin to adjust with BMI bar
@@ -92,7 +94,7 @@ function App() {
               <Label>Height (in cm)</Label><br/>
               <Input 
                   type="text" 
-                  onChange={(e)=>setHeight(e.target.value)} 
+                  onChange={(e)=>changeHeight(e.target.value)} 
                   value={height} 
                   invalid={err.height}
               />
@@ -102,7 +104,7 @@ function App() {
               <Label>Weight (in kg)</Label><br/>
               <Input 
                   type="text" 
-                  onChange={(e)=>setWeight(e.target.value)} 
+                  onChange={(e)=>changeWeight(e.target.value)} 
                   value={weight} 
                   invalid={err.weight}
               />
