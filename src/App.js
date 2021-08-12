@@ -26,7 +26,7 @@ function App() {
   const [positionBmiPin, setPositionBmiPin] = useState(0);
 
   useEffect(()=>{
-    const errHeight = (height.length>=0 && height*1!=height ) || height[0]=='.' ? true : false;
+    const errHeight = (height.length>=0 && `${height*1}`==='NaN' ) || height[0]==='.' ? true : false;
     
     setErr({
       height: errHeight,
@@ -35,7 +35,7 @@ function App() {
   },[height])
 
   useEffect(()=>{
-    const errWeight = (weight.length>=0 && weight*1!=weight) || weight[0]=='.' ? true : false;
+    const errWeight = (weight.length>=0 && `${weight*1}`==='NaN') || weight[0]==='.' ? true : false;
     
     setErr({
       height: err.height,
@@ -61,8 +61,8 @@ function App() {
   },[dataBmi])
 
   const handleSubmit= async()=>{
-    const errHeight = height.length==0 ? true : false;
-    const errWeight = weight.length==0 ? true : false;
+    const errHeight = height.length===0 ? true : false;
+    const errWeight = weight.length===0 ? true : false;
 
     if(errWeight || errHeight){
       setErr({
@@ -130,13 +130,13 @@ function App() {
         </Col>
 
         <Col sm="12" className="mt-5">
-          {dataBmi.name!='' && 
+          {dataBmi.name!=='' && 
             <div className="chart-container">
               <div className="icon-chart" style={{left:`${positionBmiPin}px`}}>
                 <h2 className="bmi-icon">{dataBmi.bmi && dataBmi.bmi}</h2>
-                <img src={pinIcon} width="50px" />
+                <img src={pinIcon} width="50px" alt="Arrow BMI" />
               </div>
-              <img src={chart} width="600px"></img>
+              <img src={chart} width="600px" alt="BMI Chart Bar"></img>
             </div>
           }
         </Col>
