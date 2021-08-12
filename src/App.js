@@ -26,7 +26,7 @@ function App() {
   const [positionBmiPin, setPositionBmiPin] = useState(0);
 
   useEffect(()=>{
-    const errHeight = (height.length>=0 && height*1!==height ) || height[0]=='.' ? true : false;
+    const errHeight = (height.length>=0 && height*1!=height ) || height[0]=='.' ? true : false;
     
     setErr({
       height: errHeight,
