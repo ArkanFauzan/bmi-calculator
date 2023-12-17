@@ -62,6 +62,27 @@ function App() {
     }
   },[dataBmi])
 
+  const calculateBMI = (height, weight) => {
+    let heightInMeter = height<10 ? height : height/100;
+    let bmi = weight/(heightInMeter**2);
+    return Math.round(bmi*10)/10; // to get 1 decimal place
+  }
+
+  const categoryBMI = (BMI) => {
+    if(BMI<18.5){
+        return "underweight";
+    }
+    else if(BMI<25){
+        return "normal";
+    }
+    else if(BMI<30){
+        return "overweight";
+    }
+    else{
+        return "obesity";
+    }
+}
+
   const handleSubmit= async()=>{
     const errHeight = height.length===0 ? true : false;
     const errWeight = weight.length===0 ? true : false;
@@ -74,14 +95,21 @@ function App() {
       return 
     }
 
-    const data = {
-      name: "Your BMI",
-      height: height,
-      weight: weight
-    }
+    // remove BE (not active, calculate in FE)
+    // const result = await axios.post(apiUrl, data)
 
-    const result = await axios.post(apiUrl, data)
-    setDataBmi(result.data);
+    // process
+    let bmi = calculateBMI(height, weight).toFixed(1);
+    let bmiCategory = categoryBMI(bmi);
+    let heightCM = height<10 ? height*100 : height;
+    
+    setDataBmi({
+        name : "Your BMI",
+        height : parseFloat(heightCM),
+        weight : parseFloat(weight),
+        bmi: parseFloat(bmi).toFixed(1),
+        bmiCategory
+    });
   }
 
   return (
