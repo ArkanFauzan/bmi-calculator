@@ -1,12 +1,9 @@
 import {useEffect, useState} from 'react'
 import {Row, Col, Button, FormFeedback, Input, Label, Container} from 'reactstrap'
 import './App.css';
-import axios from 'axios'
 
 import chart from './assets/img/chart.png'
 import pinIcon from './assets/img/pin-icon.png'
-
-const apiUrl = "https://bmi-calculator-simple.herokuapp.com/bmi"
 
 function App() {
   const [height, setHeight] = useState('');
