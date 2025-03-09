@@ -22,6 +22,13 @@ function App() {
   // for bmi pin position based on bmi value
   const [positionBmiPin, setPositionBmiPin] = useState(0);
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault(); // Prevents adding a new line in some cases
+      handleSubmit();
+    }
+  };
+
   const changeHeight = (height)=>{
     setHeight(height);
     const errHeight = (height.length>=0 && `${height*1}`==='NaN' ) || height[0]==='.' ? true : false;
@@ -120,6 +127,7 @@ function App() {
               <Input 
                   type="text" 
                   onChange={(e)=>changeHeight(e.target.value)} 
+                  onKeyDown={handleKeyDown} // Listen for Enter key
                   value={height} 
                   invalid={err.height}
               />
@@ -130,6 +138,7 @@ function App() {
               <Input 
                   type="text" 
                   onChange={(e)=>changeWeight(e.target.value)} 
+                  onKeyDown={handleKeyDown} // Listen for Enter key
                   value={weight} 
                   invalid={err.weight}
               />
