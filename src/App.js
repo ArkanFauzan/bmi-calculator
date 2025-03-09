@@ -156,7 +156,7 @@ function App() {
           </table>
         </Col>
 
-        <Col sm="12" className="mt-5">
+        <Col sm="12" className="mt-5" style={{overflowX: 'scroll'}}>
           {dataBmi.name!=='' && 
             <div className="chart-container">
               <div className="icon-chart" style={{left:`${positionBmiPin}px`}}>
